@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://public-frontend-cos.metadl.com/mgx/img/favicon.png" type="image/png">
+    <title>متجر العطور الفاخرة - Luxury Perfume Store</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-brand">
+                <i class="fas fa-spray-can"></i>
+                <h1>عطور فاخرة</h1>
+            </div>
+            <nav class="nav-menu">
+                <a href="#home" class="nav-link active">الرئيسية</a>
+                <a href="#products" class="nav-link">المنتجات</a>
+                <a href="#about" class="nav-link">من نحن</a>
+                <a href="#contact" class="nav-link">اتصل بنا</a>
+            </nav>
+            <div class="cart-icon" onclick="toggleCart()">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h2>اكتشف عالم العطور الفاخرة</h2>
+            <p>مجموعة مميزة من أفخر العطور العالمية والشرقية</p>
+            <button class="cta-btn" onclick="scrollToProducts()">تسوق الآن</button>
+        </div>
+        <div class="hero-image">
+            <div class="perfume-bottle"></div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products-section">
+        <div class="container">
+            <h2 class="section-title">منتجاتنا المميزة</h2>
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2 class="section-title">من نحن</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>متجر العطور الرائد في المنطقة</h3>
+                    <p>نحن متخصصون في توفير أفخر أنواع العطور من أشهر العلامات التجارية العالمية والمحلية. نسعى لتقديم
+                        تجربة تسوق مميزة مع ضمان الجودة والأصالة.</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> عطور أصلية 100%</li>
+                        <li><i class="fas fa-check"></i> توصيل سريع ومجاني</li>
+                        <li><i class="fas fa-check"></i> ضمان الجودة</li>
+                        <li><i class="fas fa-check"></i> خدمة عملاء متميزة</li>
+                    </ul>
+                </div>
+                <div class="about-image">
+                    <div class="perfume-collection"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">اتصل بنا</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>الهاتف</h4>
+                            <p>0605076774</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>البريد الإلكتروني</h4>
+                            <p>
+                                <a href="mailto:allal.lahlou5@gmail.com">allal.lahlou5@gmail.com</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>العنوان</h4>
+                            <p>تيفلت المغرب</p>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form" onsubmit="submitContactForm(event)">
+                    <input type="text" name="name" placeholder="الاسم" required>
+                    <input type="email" name="email" placeholder="البريد الإلكتروني" required>
+                    <textarea name="message" placeholder="الرسالة" required></textarea>
+                    <button type="submit">إرسال الرسالة</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shopping Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>سلة التسوق</h3>
+            <button class="close-cart" onclick="toggleCart()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be loaded dynamically -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>المجموع: <span id="cartTotal">0</span> ريال</strong>
+            </div>
+            <button class="checkout-btn" onclick="showCheckout()">إتمام الطلب</button>
+        </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div class="modal-body" id="modalBody">
+                <!-- Product details will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal" id="checkoutModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeCheckoutModal()">&times;</span>
+            <div class="checkout-form">
+                <h3>إتمام الطلب</h3>
+                <form onsubmit="submitOrder(event)">
+                    <div class="form-group">
+                        <label>الاسم الكامل</label>
+                        <input type="text" required>
+                        <input type="text" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>رقم الهاتف</label>
+                        <input type="tel" required>
+                        <input type="tel" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label>العنوان</label>
+                        <textarea required></textarea>
+                        <textarea name="address" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>طريقة الدفع</label>
+                        <select required>
+                        <select name="payment" required>
+                            <option value="">اختر طريقة الدفع</option>
+                            <option value="cash">الدفع عند الاستلام</option>
+                            <option value="card">بطاقة ائتمانية</option>
+                            <option value="bank">تحويل بنكي</option>
+                        </select>
+                    </div>
+                    <div class="order-summary">
+                        <h4>ملخص الطلب</h4>
+                        <div id="orderSummary"></div>
+                        <div class="total-amount">
+                            <strong>المجموع الكلي: <span id="orderTotal">0</span> ريال</strong>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-order-btn">تأكيد الطلب</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>متجر العطور الفاخرة</h4>
+                    <p>وجهتك الأولى للعطور الأصلية والفاخرة</p>
+                </div>
+                <div class="footer-section">
+                    <h4>روابط سريعة</h4>
+                    <ul>
+                        <li><a href="#home">الرئيسية</a></li>
+                        <li><a href="#products">المنتجات</a></li>
+                        <li><a href="#about">من نحن</a></li>
+                        <li><a href="#contact">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>تابعنا</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 متجر العطور الفاخرة. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="./script.js"></script>
+</body>
+
+</html>
